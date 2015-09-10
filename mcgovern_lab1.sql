@@ -2,7 +2,7 @@
 * @Author: grantmcgovern
 * @Date:   2015-09-03 12:52:31
 * @Last Modified by:   grantmcgovern
-* @Last Modified time: 2015-09-08 17:39:28
+* @Last Modified time: 2015-09-09 23:09:41
 *
 *
 * Lab #1
@@ -21,7 +21,8 @@ FROM
 	Invoice 
 	INNER JOIN Customer 
 		ON Invoice.CustomerId = Customer.CustomerId 
-			WHERE Invoice.Total > 5;
+			WHERE Invoice.Total > 50
+			GROUP BY LastName, FirstName;
 
 /*
 3.
@@ -36,13 +37,6 @@ FROM
 /*
 4.
 */
--- SELECT LastName, FirstName, Quantity 
--- FROM 
--- 	Customer 
--- 	INNER JOIN Invoice
--- 		ON Customer.CustomerId = Invoice.CustomerId
--- 		INNER JOIN InvoiceLine
--- 			ON InvoiceLine.InvoiceId = Invoice.InvoiceId;
 SELECT FirstName, LastName, SUM(Quantity) 
 FROM 
 	Customer 
