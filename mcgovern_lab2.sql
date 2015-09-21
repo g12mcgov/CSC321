@@ -2,7 +2,7 @@
 * @Author: grantmcgovern
 * @Date:   2015-09-20 13:57:58
 * @Last Modified by:   grantmcgovern
-* @Last Modified time: 2015-09-21 15:31:21
+* @Last Modified time: 2015-09-21 16:49:27
 */
 
 /*
@@ -30,7 +30,7 @@ JOIN
 	Track 
 		USING(AlbumId) 
 		GROUP BY Album.Title 
-			HAVING COUNT(*) = 13 AND TOTAL(Track.Milliseconds) > 3600000;
+			HAVING TOTAL(Track.Milliseconds) > 3600000;
 
 /*
 4.
@@ -38,7 +38,7 @@ JOIN
 /* First run this command */
 CREATE VIEW AlbumLengthView AS
 SELECT Album.Title AS Title, TOTAL(Track.Milliseconds) AS Length FROM Album 
-JOIN 
+JOIN
 	Track USING(AlbumId) 
 	GROUP BY Album.Title;
 /* Then run the below command */
@@ -62,6 +62,7 @@ EXCEPT
 /*
 7.
 */
-
-
-
+SELECT Genre.Name as GenreName, MediaTypeName, COUNT(*)
+	FROM Genre LEFT OUTER JOIN (
+		SELECT MediaType.Name as MediaTypeName, Track.Name as TrackName
+			FROM MediaType LEFT OUTER JOIN Track) GROUP BY GenreName, MediaTypeName;
