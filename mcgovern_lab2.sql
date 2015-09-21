@@ -2,7 +2,7 @@
 * @Author: grantmcgovern
 * @Date:   2015-09-20 13:57:58
 * @Last Modified by:   grantmcgovern
-* @Last Modified time: 2015-09-21 17:47:00
+* @Last Modified time: 2015-09-21 19:35:12
 */
 
 /*
@@ -24,7 +24,7 @@ JOIN
 /*
 3.
 */
-SELECT ALbum.Title FROM Album 
+SELECT ALbum.Title, SUM(Track.Milliseconds) / 60000 AS Minutes FROM Album 
 JOIN 
 	Track 
 		USING(AlbumId) 
