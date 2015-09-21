@@ -2,16 +2,15 @@
 * @Author: grantmcgovern
 * @Date:   2015-09-20 13:57:58
 * @Last Modified by:   grantmcgovern
-* @Last Modified time: 2015-09-21 16:49:27
+* @Last Modified time: 2015-09-21 17:47:00
 */
 
 /*
 1.
 */
-SELECT MAX(Invoice.Total) AS Totals 
-FROM Invoice 
-	UNION 
-	SELECT MIN(Invoice.Total) FROM Invoice;
+SELECT MAX(Invoice.Total) AS Totals FROM Invoice 
+UNION 
+SELECT MIN(Invoice.Total) FROM Invoice;
 
 /*
 2.
