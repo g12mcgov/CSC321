@@ -2,7 +2,7 @@
 * @Author: grantmcgovern
 * @Date:   2015-09-20 13:57:58
 * @Last Modified by:   grantmcgovern
-* @Last Modified time: 2015-09-21 19:35:12
+* @Last Modified time: 2015-09-22 14:31:36
 */
 
 /*
@@ -61,7 +61,12 @@ EXCEPT
 /*
 7.
 */
-SELECT Genre.Name as GenreName, MediaTypeName, COUNT(*)
-	FROM Genre LEFT OUTER JOIN (
-		SELECT MediaType.Name as MediaTypeName, Track.Name as TrackName
-			FROM MediaType LEFT OUTER JOIN Track) GROUP BY GenreName, MediaTypeName;
+/* First run this command */
+CREATE VIEW Combined AS
+	SELECT MediaTypeId, MediaType.Name AS MediaName, GenreId, Genre.Name AS GenreName
+		FROM MediaType, Genre
+/* Then run the below command */
+SELECT Combined.MediaName, Combined.GenreName, COUNT(TrackId)
+	FROM Combined LEFT OUTER JOIN Track USING(GenreId, MediaTypeId)
+		GROUP BY GenreId, MediaTypeId		
+
